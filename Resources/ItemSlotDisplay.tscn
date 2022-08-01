@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/sprites/items/slot_empty.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends CenterContainer
+
+onready var inventory=preload(\"res://scenes/Inventory.tres\") 
+onready var item_textureRect=$TextureItem
+onready var item_amount_label=$TextureItem/Label
+
+func display_item(item):
+	if item is Item:
+		item_textureRect.texture=item.texture
+		if item.is_stackable:
+			item_amount_label.text=str(item.amount)
+		else:
+			item_amount_label.text=\"\"
+	else:
+		item_textureRect.texture=load(\"res://Assets/sprites/Items/slot_empty.png\")
+		item_amount_label.text=\"\"
+		
+func get_drag_data(_position):
+	var item_index=get_index()
+	var item=inventory.remove_item(item_index)
+	if item is Item:
+		var data={}
+		data.item=item
+		data.item_index=item_index
+		var preview=load(\"res://Preview.tscn\")
+		var preview_instance=preview.instance()
+		print(\"test\",preview_instance,preview_instance.label)
+		
+		inventory.drag_data=data
+		return data
+	
+func can_drop_data(_position, data):
+	return data is Dictionary and data.has(\"item\")
+	
+func drop_data(_position, data):
+	var my_item_index=get_index()
+	var my_item=inventory.items[my_item_index]
+	if my_item is Item and data is Dictionary \\
+	and data.item.name==my_item.name \\
+	and my_item.is_stackable:
+		my_item.amount+=data.item.amount
+		inventory.emit_signal(\"items_changed\",[my_item_index])
+	else:
+		inventory.swap_item(my_item_index,data.item_index)
+		inventory.set_item(my_item_index,data.item)
+	inventory.drag_data=null
+"
+
+[node name="ItemSlotDisplay" type="CenterContainer"]
+margin_right = 8.0
+margin_bottom = 8.0
+script = SubResource( 1 )
+
+[node name="TextureSlot" type="TextureRect" parent="."]
+margin_right = 8.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 8, 8 )
+texture = ExtResource( 2 )
+
+[node name="TextureItem" type="TextureRect" parent="."]
+margin_right = 8.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 8, 8 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="TextureItem"]
+margin_left = 1.0
+margin_top = 4.0
+margin_right = 17.0
+margin_bottom = 18.0
+rect_scale = Vector2( 0.427015, 0.300855 )
+custom_colors/font_color = Color( 0.196078, 0.996078, 0.972549, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "0"
+align = 2

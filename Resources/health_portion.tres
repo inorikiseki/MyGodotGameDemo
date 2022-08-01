@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Resources/Item.gd" type="Script" id=1]
+[ext_resource path="res://Assets/sprites/items/health_portion.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "health_portion"
+texture = ExtResource( 2 )
+is_stackable = true
+amount = 1

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/metalClick.ogg-be7b6a8cb9ed9ca8248500f5628b90d1.oggstr"
+
+[deps]
+
+source_file="res://audio/rpg_kenney_audio/Audio/metalClick.ogg"
+dest_files=[ "res://.import/metalClick.ogg-be7b6a8cb9ed9ca8248500f5628b90d1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

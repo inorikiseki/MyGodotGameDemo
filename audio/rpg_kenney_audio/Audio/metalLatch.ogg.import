@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/metalLatch.ogg-bbb0b2ae2bc5beb0aa543d373bc5d8e3.oggstr"
+
+[deps]
+
+source_file="res://audio/rpg_kenney_audio/Audio/metalLatch.ogg"
+dest_files=[ "res://.import/metalLatch.ogg-bbb0b2ae2bc5beb0aa543d373bc5d8e3.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

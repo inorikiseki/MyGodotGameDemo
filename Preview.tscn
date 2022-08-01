@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Preview.gd" type="Script" id=1]
+
+[node name="Preview" type="TextureRect"]
+margin_right = 8.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 8, 8 )
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 8.0
+margin_right = 40.0
+margin_bottom = 22.0
+rect_scale = Vector2( 0.484818, 0.429426 )
+text = "preview"
